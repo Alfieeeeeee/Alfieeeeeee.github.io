@@ -1,31 +1,33 @@
-function fn() {
-    var font = document.getElementById('d1');
-    font.classList.add('red');
-    if (font.getAttribute('class') == 'red')
-    {
-        font.classList.remove('red')
-        font.classList.add('green')
-    }
-    else
-    {
-        font.classList.remove('green')
-        font.classList.add('red')
-    }
+var btnAdd = document.getElementById('add');
+var listbox = document.getElementById('listbox');
+
+function getValue ()
+{
+    var inpValue = document.getElementById('todolist').value;
+    var newItem = document.createElement('li');
+    newItem.innerText = inpValue;
+
+    var btnDelete = document.createElement('button');
+    btnDelete.innerText = "刪除項目"
+    btnDelete.setAttribute("class", "btn btn-outline-secondary btn-sm deleteItem")
+    document.getElementById("todolist").value="";
+
+    var container = document.createElement('div');
+    container.setAttribute("style","display:flex")
+    container.appendChild(newItem);
+    container.appendChild(btnDelete);
+    listbox.append(container);
+
+
+    document.getElementById("todolist").value=""
 }
 
-var btn = document.getElementById('btn');
-btn.addEventListener("click",fn)
+btnAdd.addEventListener('click', getValue)
 
-function xx(){
-    var ele = document.createElement('div');
-    ele.setAttribute('id','d1');
-    ele.setAttribute('class', 'red');
-    ele.innerText = "我應該要變成紅色";
-
-    var inp = document.createElement('input');
-    inp.setAttribute('type','text');
-    inp.setAttribute('value', '你看到我了');
-
-    document.getElementsByTagName('body')[0].append(ele);
-    document.getElementsByTagName('body')[0].append(inp);
-}
+document.addEventListener('click', function(e)
+{
+    if (e.target.classList.contains("deleteItem"))
+    {
+        e.target.parentElement.remove()
+    }
+});
