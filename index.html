@@ -1,43 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lepcha&family=Noto+Serif+Display:ital@1&display=swap" rel="stylesheet">
-<style>
-        .box
-        {
-            border: 1px solid #ddd;
+    <title>Todo List</title>
+
+    <style>
+        .container {
             text-align: center;
-            height: 550px;
-            padding: 2%;
         }
 
-        .text
-        {
-            padding: 3%;
-            color: #757575;
-            text-decoration:none;
-            font-size: 12px;
+        .box {
+            width: 50%;
+            margin: auto;
+            border: 2px solid;
+            overflow: auto;
         }
-        img
-        {
-            vertical-align: middle;
+
+        .input {
+            font-size: 20px
+        }
+
+        #btnAdd {
+            width: 100px;
+            height: 35px;
+            font-size: 20px;
+            color: blue;
+        }
+
+        .li {
+            text-align: start;
+            border: 1px solid lightgray;
+            font-size: 20px;
+            margin: 10px;
+        }
+
+        #btnDelete {
+            width: 100px;
+            height: 35px;
+            font-size: 20px;
+            color: red;
+        }
+
+        .time {
+            font-size: 15px;
+        }
+
+        .label {
+            width: 100%;
         }
     </style>
 </head>
+
 <body>
-    <div class="box">
-        <img src="https://picsum.photos/id/684/400/400">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Beatae quae neque laudantium qui molestias porro vitae suscipit quas. Esse vero quos facilis quo quibusdam deleniti? Magnam exercitationem vero tenetur totam.
-        <div class="text">
-            <span>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ut fuga, sit debitis alias sunt consectetur, voluptates consequatur repellendus porro nisi, quasi quaerat ullam cupiditate soluta fugiat nostrum beatae voluptate quibusdam?</span>
+    <div class="container">
+        <h1>Todo List</h1>
+        <div class="box text-auto">
+            <div class="input">
+                <h3>待辦事項
+                    <input type="text" id="input" class="input" size="60px" value="聊天">
+                    <button id="btnAdd">新增事項</button>
+                </h3>
+            </div>
+
+            <div class="list">
+                <ul id="ul" class="ul">
+                    <li class="li">
+                        <div>
+                            <label class="label" for="">aaaa</label>
+                        </div>
+                        <button id="btnDelete">刪除</button>
+                        <p class="time">創建時間: Thu Apr 13 2023 00:22:29 GMT+0800 (台北標準時間)</p>
+                    </li>
+
+                    <li class="li">
+                        <div>
+                            <div>
+                                <label class="label" for="">bbbb</label>
+                            </div>
+                        </div>
+                        <button id="btnDelete">刪除</button>
+                        <p class="time">創建時間: Thu Apr 13 2023 00:22:29 GMT+0800 (台北標準時間)</p>
+                    </li>
+
+                    <li class="li">
+                        <div>
+                            <label class="label" for="">cccc</label>
+                        </div>
+                        <button id="btnDelete">刪除</button>
+                        <p class="time">創建時間: Thu Apr 13 2023 00:22:29 GMT+0800 (台北標準時間)</p>
+                    </li>
+
+                    <li class="li">
+                        <div>
+                            <label class="label" for="">dddd</label>
+                        </div>
+                        <button id="btnDelete">刪除</button>
+                        <p class="time">創建時間: Thu Apr 13 2023 00:22:29 GMT+0800 (台北標準時間)</p>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 
+    <script>
+        let btnAdd = document.getElementById("btnAdd");
+        let ul = document.getElementById("ul");
+
+        btnAdd.addEventListener("click", addList);
+        ul.addEventListener("click", deleteList);
+
+        function addList() {
+            let todoList = document.getElementById("input").value;
+            let time = new Date();
+
+            let li = document.createElement("li");
+            li.setAttribute("class", "li");
+
+            let div = document.createElement("div");
+
+            let label = document.createElement("label");
+            label.setAttribute("class", "label");
+            label.innerText = todoList;
+
+            let btn = document.createElement("button");
+            btn.setAttribute("id", "btnDelete");
+            btn.innerText = "刪除";
+
+            let p = document.createElement("p");
+            p.setAttribute("class", "time");
+            p.innerText = time;
+
+            // btn.addEventListener("click", () => {
+            //     li.remove();
+            // })
+
+            ul.append(li);
+            li.append(div);
+            div.append(label);
+            div.after(btn);
+            btn.after(p);
+
+            document.getElementById("input").value = "";
+        };
+
+        function deleteList(e) {
+            ul.removeChild(e.target.parentElement);
+        };
+    </script>
 </body>
+
 </html>
